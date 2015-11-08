@@ -10,23 +10,22 @@ class CaesarCipher(object):
         return shifted
 
     def decode(self, str):
-        unshifted = [chr(ord(x) - self.shift) for x in str]
-        unshifted = [self.map_decode(x, self.shift) for x in unshifted]
+        unshifted = [self.map_decode(x, self.shift) for x in str]
         return unshifted
 
     def map_encode(self, char, shift):
         shifted = ord(char) + self.shift
         if int(shifted) > 122:
-            shifted = (shifted-1) - 122 + 97
+            shifted = (shifted - 1) - 122 + 97
         return shifted
 
     def map_decode(self, char, shift):
         shifted = ord(char) - self.shift
         if shifted < 97:
-            shifted = 122 - ((97 - shifted) + 1)
+            shifted =  122 - (97 - (shifted - self.shift) )
         return shifted
 
-a = CaesarCipher(1)
+a = CaesarCipher(2)
 
 
 c = a.decode('a')
