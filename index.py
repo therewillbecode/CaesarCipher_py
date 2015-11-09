@@ -6,12 +6,16 @@ class CaesarCipher(object):
         self.shift = shift
 
     def encode(self, str):
-        shifted = [self.map_encode(x, self.shift) for x in str]
-        return shifted
+        print(str)
+        str = str.lower()
+        shifted = [chr(self.map_encode(x, self.shift)) for x in str]
+        return ''.join(shifted).upper()
 
     def decode(self, str):
-        unshifted = [self.map_decode(x, self.shift) for x in str]
-        return unshifted
+        str = str.lower()
+        print(str)
+        unshifted = [chr(self.map_decode(x, self.shift)) for x in str]
+        return ''.join(unshifted).upper()
 
     def map_encode(self, char, shift):
         shifted = ord(char) + self.shift
@@ -22,13 +26,12 @@ class CaesarCipher(object):
     def map_decode(self, char, shift):
         shifted = ord(char) - self.shift
         if shifted < 97:
-            shifted =  122 - (97 - (shifted - self.shift) )
+            shifted = 122 - (97 - (shifted + 1))
         return shifted
 
-a = CaesarCipher(2)
+a = CaesarCipher(5)
 
+c = a.encode('NY,X%F%XMNKY%HNUMJW&&')
 
-c = a.decode('a')
-
-
-print(chr(c[0]))
+// " NY'X F XMNKY HNUMJW!! "
+print(c)
